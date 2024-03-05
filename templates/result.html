@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>タロットカード占いの結果</title>
+</head>
+<body>
+    <h1>あなたが選んだカードは:</h1>
+    <ul>
+        {% for card in cards %}
+            <li>{{ card['name'] }}: {{ card['meaning'] }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">もう一度占う</a>
+</body>
+</html>
