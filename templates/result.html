@@ -2,19 +2,30 @@
 
 {% block content %}
 <div class="container mt-5">
-  <h1>占い結果</h1>
-  <div class="row">
-    {% for card in cards %}
-    <div class="col-md-4">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h5 class="card-title">{{ card.name }}</h5>
-          <p class="card-text">{{ card.meaning }}</p>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-  <a href="/" class="btn btn-secondary">もう一度占う</a>
+ <h1>占い結果</h1>
+ 
+ <div class="row">
+   <div class="col-md-12">
+     <h3>選ばれたカードと意味</h3>
+     <ul class="list-group">
+       {% for card in cards %}
+       <li class="list-group-item">
+         <div class="row">
+           <div class="col-md-6">
+             {{ card.name }}
+           </div>
+           <div class="col-md-6">
+             {{ card.meaning }}
+           </div>
+         </div>
+       </li>
+       {% endfor %}
+     </ul>
+   </div>
+ </div>
+ 
+ <div class="mt-4">
+   <a href="/" class="btn btn-secondary">もう一度占う</a>
+ </div>
 </div>
 {% endblock %}
