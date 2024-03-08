@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>タロットカード占い</title>
-</head>
-<body>
-    <h1>タロットカード占いへようこそ！</h1>
-    <form method="POST">
-        <label for="num_cards">選ぶカードの枚数:</label>
-        <input type="number" id="num_cards" name="num_cards" min="1" max="22" required>
-        <button type="submit">占う</button>
-    </form>
-</body>
-</html>
+{% extends 'bootstrap/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1>タロット占い</h1>
+  <form method="post">
+    <div class="form-group">
+      <label for="num_cards">カードの枚数を選択してください:</label>
+      <select class="form-control" id="num_cards" name="num_cards">
+        <option value="1">1枚</option>
+        <option value="2">2枚</option>
+        <option value="3">3枚</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">占う</button>
+  </form>
+</div>
+{% endblock %}
