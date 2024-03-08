@@ -13,13 +13,13 @@
          <div class="row align-items-center">
            <div class="col-md-4">
              <img src="{{ url_for('static', filename='card_images/' + card.image + '.jpg') }}"
-                  alt="{{ card.name }}" class="img-fluid card-image">
+                  alt="{{ card.name }}" class="img-fluid card-image" style="width: 50%;">
            </div>
            <div class="col-md-4">
-             <p class="card-name">{{ card.name }}</p>
+             <p class="card-name" style="font-size: 1.2em;">{{ card.name }}</p>
            </div>
            <div class="col-md-4">
-             <p class="card-meaning">{{ card.meaning }}</p>
+             <p class="card-meaning" style="font-size: 1.2em;">{{ card.meaning }}</p>
            </div>
          </div>
        </li>
