@@ -3,33 +3,45 @@
 {% block content %}
 
 <div class="container mt-5">
-    <h1>占い結果</h1>
-    <div class="row">
-        <div class="col-md-12">
-            <h3>選ばれたカードと意味</h3>
-            <ul class="list-group">
-                {% for card in cards %}
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="{{ url_for('static', filename='card_images/' + card.image + '.jpg') }}"
-                                alt="{{ card.name }}" class="img-fluid">
-                        </div>
-                        <div class="col-md-4">
-                            {{ card.name }}
-                        </div>
-                        <div class="col-md-4">
-                            {{ card.meaning }}
-                        </div>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    <div class="mt-4">
-        <a href="/" class="btn btn-secondary">もう一度占う</a>
-    </div>
+ <h1>占い結果</h1>
+ <div class="row">
+   <div class="col-md-12">
+     <h3>選ばれたカードと意味</h3>
+     <ul class="list-group">
+       {% for card in cards %}
+       <li class="list-group-item">
+         <div class="row align-items-center">
+           <div class="col-md-4">
+             <img src="{{ url_for('static', filename='card_images/' + card.image + '.jpg') }}"
+                  alt="{{ card.name }}" class="img-fluid card-image">
+           </div>
+           <div class="col-md-4">
+             <p class="card-name">{{ card.name }}</p>
+           </div>
+           <div class="col-md-4">
+             <p class="card-meaning">{{ card.meaning }}</p>
+           </div>
+         </div>
+       </li>
+       {% endfor %}
+     </ul>
+   </div>
+ </div>
+ <div class="mt-4">
+   <a href="/" class="btn btn-secondary">もう一度占う</a>
+ </div>
 </div>
+{% endblock %}
 
+{% block styles %}
+{{ super() }}
+<style>
+ .card-image {
+   max-width: 100%;
+   height: auto;
+ }
+ .card-name, .card-meaning {
+   margin-bottom: 0;
+ }
+</style>
 {% endblock %}
