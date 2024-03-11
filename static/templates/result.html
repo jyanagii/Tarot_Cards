@@ -11,7 +11,7 @@
                 {% for card in cards %}
                 <div class="card-position-{{ loop.index }}">
                     <img src="{{ url_for('static', filename='card_images/' + card.image + '.jpg') }}"
-                         alt="{{ card.name }}" class="img-fluid card-image">
+                         alt="{{ card.name }}" class="img-fluid card-image  {% if card.reversed %}reversed{% endif %}">
                     <p class="card-name">{{ card.name }}</p>
                     <p class="card-meaning">{{ card.meaning }}</p>
                 </div>
@@ -35,7 +35,7 @@
                       {% endif %}
                         <div class="col-md-6">
                             <img src="{{ url_for('static', filename='card_images/' + card.image + '.jpg') }}"
-                                 alt="{{ card.name }}" class="img-fluid card-image" style="width: 50%;">
+                                 alt="{{ card.name }}" class="img-fluid card-image {% if card.reversed %}reversed{% endif %}" style="width: 50%;">
                         </div>
                         <div class="col-md-4">
                             <p class="card-name" style="font-size: 1.2em;">{{ card.name }}</p>
@@ -60,6 +60,9 @@
     .card-image {
         max-width: 100%;
         height: auto;
+    }
+    .card-image.reversed {
+    transform: scaleY(-1);
     }
     .card-name, .card-meaning {
         margin-bottom: 0;

@@ -48,6 +48,8 @@ def index():
     
         selected_cards = random.sample(tarot_cards, num_cards)
 
+        for card in selected_cards:
+            card['reversed'] = random.randint(0, 1)
 
         # logging
         user_ip = request.remote_addr
