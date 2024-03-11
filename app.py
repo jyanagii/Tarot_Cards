@@ -3,10 +3,11 @@ from flask_bootstrap import Bootstrap
 import random
 import logging
 
-logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
 app = Flask(__name__, static_folder='static', template_folder='static/templates')
 Bootstrap(app)
+
+logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
 # タロットカードのデータ
 tarot_cards = [
@@ -37,8 +38,16 @@ tarot_cards = [
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        num_cards = int(request.form['num_cards'])
+        spread_type = request.form['spread_type']
+        if spread_type == 'one_card':
+            num_cards = 1
+        elif spread_type == 'three_cards':
+            num_cards = 3
+        else:
+            num_cards = 10
+    
         selected_cards = random.sample(tarot_cards, num_cards)
+
 
         # logging
         user_ip = request.remote_addr
@@ -53,7 +62,8 @@ def index():
             device = 'PC'
         logging.info(f"User with IP {user_ip}, Device: {device}, Selected {num_cards} cards")
 
-        return render_template('result.html', cards=selected_cards)
+        return render_template('result.html', cards=selected_cards, spread_type=spread_type)
+
     return render_template('index.html')
 
 if __name__ == '__main__':

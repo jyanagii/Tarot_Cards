@@ -1,47 +1,84 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block content %}
-
 <div class="container mt-5">
- <h1>占い結果</h1>
- <div class="row">
-   <div class="col-md-12">
-     <h3>選ばれたカードと意味</h3>
-     <ul class="list-group">
-       {% for card in cards %}
-       <li class="list-group-item">
-         <div class="row align-items-center">
-           <div class="col-md-4">
-             <img src="{{ url_for('static', filename='card_images/' + card.image + '.jpg') }}"
-                  alt="{{ card.name }}" class="img-fluid card-image" style="width: 50%;">
-           </div>
-           <div class="col-md-4">
-             <p class="card-name" style="font-size: 1.2em;">{{ card.name }}</p>
-           </div>
-           <div class="col-md-4">
-             <p class="card-meaning" style="font-size: 1.2em;">{{ card.meaning }}</p>
-           </div>
-         </div>
-       </li>
-       {% endfor %}
-     </ul>
-   </div>
- </div>
- <div class="mt-4">
-   <a href="/" class="btn btn-secondary">もう一度占う</a>
- </div>
+    <h1>占い結果</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>選ばれたカードと意味</h3>
+            {% if spread_type == 'celtic_cross' %}
+            <div class="celtic-cross">
+                {% for card in cards %}
+                <div class="card-position-{{ loop.index }}">
+                    <img src="{{ url_for('static', filename='card_images/' + card.image + '.jpg') }}"
+                         alt="{{ card.name }}" class="img-fluid card-image">
+                    <p class="card-name">{{ card.name }}</p>
+                    <p class="card-meaning">{{ card.meaning }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <ul class="list-group">
+                {% for card in cards %}
+                <li class="list-group-item">
+                    <div class="row align-items-center">
+                      {% if spread_type == 'three_cards' %}
+                      <div class="col-md-2">
+                        {% if loop.index == 1 %}
+                        <p class="card-position" style="font-size: 1.4em;">過去</p>
+                        {% elif loop.index == 2 %}
+                        <p class="card-position" style="font-size: 1.4em;">現在</p>
+                        {% else %}
+                        <p class="card-position" style="font-size: 1.4em;">未来</p>
+                        {% endif %}
+                      </div>
+                      {% endif %}
+                        <div class="col-md-6">
+                            <img src="{{ url_for('static', filename='card_images/' + card.image + '.jpg') }}"
+                                 alt="{{ card.name }}" class="img-fluid card-image" style="width: 50%;">
+                        </div>
+                        <div class="col-md-4">
+                            <p class="card-name" style="font-size: 1.2em;">{{ card.name }}</p>
+                            <p class="card-meaning" style="font-size: 1.2em;">{{ card.meaning }}</p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+    <div class="mt-4">
+        <a href="/" class="btn btn-secondary">もう一度占う</a>
+    </div>
 </div>
 {% endblock %}
 
 {% block styles %}
 {{ super() }}
 <style>
- .card-image {
-   max-width: 100%;
-   height: auto;
- }
- .card-name, .card-meaning {
-   margin-bottom: 0;
- }
+    .card-image {
+        max-width: 100%;
+        height: auto;
+    }
+    .card-name, .card-meaning {
+        margin-bottom: 0;
+    }
+    .celtic-cross {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 10px;
+    }
+  .card-position-1 { grid-area: 2 / 3 / 3 / 4; }
+  .card-position-2 { grid-area: 3 / 3 / 4 / 4; }
+  .card-position-3 { grid-area: 1 / 4 / 2 / 5; }
+  .card-position-4 { grid-area: 3 / 2 / 4 / 3; }
+  .card-position-5 { grid-area: 2 / 2 / 3 / 3; }
+  .card-position-6 { grid-area: 3 / 4 / 4 / 5; }
+  .card-position-7 { grid-area: 4 / 3 / 5 / 4; }
+  .card-position-8 { grid-area: 3 / 5 / 4 / 6; }
+  .card-position-9 { grid-area: 2 / 5 / 3 / 6; }
+  .card-position-10 { grid-area: 1 / 5 / 2 / 6; }
 </style>
 {% endblock %}

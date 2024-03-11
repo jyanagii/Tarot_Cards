@@ -5,11 +5,11 @@
   <h1>タロット占い</h1>
   <form method="post">
     <div class="form-group">
-      <label for="num_cards">カードの枚数を選択してください:</label>
-      <select class="form-control" id="num_cards" name="num_cards">
-        <option value="1">1枚：今日の運勢を占います</option>
-        <option value="2">2枚：問題の原因を占います</option>
-        <option value="3">3枚：1つのことの過去、現在、未来を占います</option>
+      <label for="spread_type">占いの種類を選択してください:</label>
+      <select class="form-control" id="spread_type" name="spread_type">
+        <option value="one_card">今日の運勢を占います（ワンオラクル:1枚）</option>
+        <option value="three_cards">1つのことの過去、現在、未来を占います（スリーカード:3枚）</option>
+        <option value="celtic_cross">1つのことを全体的に占います（ケルト十字:10枚）</option>
       </select>
     </div>
     <button type="submit" class="btn btn-primary">占う</button>
