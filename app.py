@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 import random
 import logging
+from interpreter import TarotInterpreter
 
 
 app = Flask(__name__, static_folder='static', template_folder='static/templates')
@@ -39,6 +40,13 @@ tarot_cards = [
 def index():
     if request.method == 'POST':
         spread_type = request.form['spread_type']
+        question_type = request.form['question_type']
+        custom_question = ""
+        
+        # 自由記述欄が表示され、何らかの値が入力されている場合その値を取得
+        if question_type == 'custom' and "question" in request.form:
+            custom_question = request.form['custom_question']
+
         if spread_type == 'one_card':
             num_cards = 1
         elif spread_type == 'three_cards':
@@ -64,7 +72,7 @@ def index():
             device = 'PC'
         logging.info(f"User with IP {user_ip}, Device: {device}, Selected {num_cards} cards")
 
-        return render_template('result.html', cards=selected_cards, spread_type=spread_type)
+        return render_template('result.html', cards=selected_cards, spread_type=spread_type, question_type=question_type, custom_question=custom_question)
 
     return render_template('index.html')
 
