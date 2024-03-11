@@ -12,7 +12,29 @@
         <option value="celtic_cross">1つのことを全体的に占います（ケルト十字:10枚）</option>
       </select>
     </div>
+    <div class="form-group">
+      <label for="question_type">占いたい内容を記入してください:</label>
+      <select class="form-control" id="question_type" name="question_type">
+        <option value="love">恋愛</option>
+        <option value="work">仕事</option>
+        <option value="relationships">人間関係</option>
+        <option value="custom">もっと詳しく（自由記述）</option>
+      </select>
+    </div>
+    <div class="form-group" id="custom_question" style="display: none;">
+      <label for="question">詳しい内容を記入してください:</label>
+      <textarea class="form-control" id="question" name="question" rows="3"></textarea>
+    </div>
     <button type="submit" class="btn btn-primary">占う</button>
   </form>
 </div>
+<script> 
+document.getElementById("question_type").addEventListener("change", function () {
+  if (this.value === "custom") {
+    document.getElementById("custom_question").style.display = "block";
+  } else {
+    document.getElementById("custom_question").style.display = "none";
+  }
+}); 
+</script>
 {% endblock %}
